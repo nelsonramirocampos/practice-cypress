@@ -1,0 +1,25 @@
+{
+  "name": "practice-cypress",
+  "version": "1.0.0",
+  "description": "Proyecto practica cypress",
+  "main": "index.js",
+  "scripts": {
+    "cypress": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nelsonramirocampos/practice-cypress.git"
+  },
+  "keywords": [
+    "cypress"
+  ],
+  "author": "Nelson Campos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nelsonramirocampos/practice-cypress/issues"
+  },
+  "homepage": "https://github.com/nelsonramirocampos/practice-cypress#readme",
+  "devDependencies": {
+    "cypress": "^9.3.1"
+  }
+}
