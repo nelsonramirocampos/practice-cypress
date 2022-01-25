@@ -33,8 +33,8 @@ describe('Suite Test Case Class Two', () => {
         //Validamos que el contenedor el error sea visible
         cy.xpath("//div[@class='error-message-container error']").should('be.visible')
 
-        //Se valida que contenga todo el texto en el mensaje de error
-        cy.xpath("//h3[contains(.,'Epic sadface: Password is required')]").should('have.text', ' sadface: Password is required')
+        //Se valida que contenga TODO el texto en el mensaje de error
+        cy.xpath("//h3[contains(.,'Epic sadface: Password is required')]").should('have.text', 'Epic sadface: Password is required')
     })
 
     it('Inicio de sesion incorrecto - falta usuario', () => {
@@ -46,6 +46,7 @@ describe('Suite Test Case Class Two', () => {
 
         cy.xpath("//div[@class='error-message-container error']").should('be.visible')
 
+        //Validamos que contenga parte del mensaje de error
         cy.xpath("//h3[contains(.,'Epic sadface: Username is required')]").should('contain.text', 'Username is required')
     })
 })
