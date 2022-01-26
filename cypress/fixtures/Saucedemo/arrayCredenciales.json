@@ -1,0 +1,13 @@
+[
+    {
+        "username": "standard_user",
+        "password": "secret_sauce",
+        "title": "Usuario Estandar"
+    },
+
+    {
+        "title": "Usuario Problematico",
+        "username": "problem_user",
+        "password": "secret_sauce"
+    }
+]
