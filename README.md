@@ -46,8 +46,8 @@ Una vez descargado el proyecto, se necesita descargar las dependencias aclaradas
 
 
 ## Estructura del proyecto
-### Carpeta integration --> Se colocan los Casos De Prueba
-
+### folder integration --> Se colocan los TC
+### folder fixtures --> Se coloca la data para los TC
 
 ## Localizador de elemento (path locator)
 Para contrar un elemento dentro de una pagina se necesita la ruta. Se puede encontrar mediante los atributos/propiedades del elemento en cuestion:
@@ -60,3 +60,29 @@ Para contrar un elemento dentro de una pagina se necesita la ruta. Se puede enco
 	-	Absolute --> /html[1]/body[1]/div[2]/c-wiz[1]/div[3]/div[2]/div[3]/div[1]/div[1]/div[3]/div[2]/c-wiz[1]/div[1]/div[1]/div[1]/div[2]/div[1]/a[1]/img[1]
 
 Cypress, no soporta la localización del elemento por XPath, por lo cual, podemos instalar la libreria cypress-xpath y colocar en dicho archivo con los test **require('cypress-xpath')** y en vez de usar el command **cy.get('ruta')** se usa **cy.xpath('ruta_xpath')**
+
+## Command Fixture
+Permite leer los datos de un archivo dentro del folder fixtures.
+### Si es un solo objeto
+```
+cy.fixture('sauceCredentials')
+	.then(credentials => {
+		cy.log(this.credentials)
+})
+```
+### Si es un array de objetos
+```
+//test_data contiene el array con los objetos
+const test_data = require('../../fixtures/ sauceCredentials.json')
+
+//Como test_data es un array, podemos usar el ciclo forEach
+//test, es una variable que contendra cada elemento del array
+test_data.forEach(test => {
+	it(‘nombre del test’, () => {
+		cy.log(test.username)
+	})
+})
+```
+
+## Link de las clases: 
+https://docs.google.com/document/d/1G8t5zQK-jb1MjjOT-l-TWrNGzpX96k0Sr9pPGXiWz5Y/edit?usp=sharing
