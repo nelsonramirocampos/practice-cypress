@@ -61,6 +61,11 @@ Para contrar un elemento dentro de una pagina se necesita la ruta. Se puede enco
 
 Cypress, no soporta la localización del elemento por XPath, por lo cual, podemos instalar la libreria cypress-xpath y colocar en dicho archivo con los test **require('cypress-xpath')** y en vez de usar el command **cy.get('ruta')** se usa **cy.xpath('ruta_xpath')**
 
+### Plugins para browsers
+Para facilitar la obtención de los localizadores, podremos usar los plugins
+- SelectorsHub --> https://selectorshub.com/ 
+- TruePath --> https://chrome.google.com/webstore/detail/truepath/mgjhkhhbkkldiihlajcnlfchfcmhipmn 
+
 ## Command Fixture
 Permite leer los datos de un archivo dentro del folder fixtures.
 ### Si es un solo objeto
