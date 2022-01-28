@@ -84,5 +84,100 @@ test_data.forEach(test => {
 })
 ```
 
+## Cypress-Cucumber
+Para poder utilizar Cucumber con Cypress, debemos instalar la librera con el comando
+ > npm install --save-dev cypress-cucumber-preprocessor
+Luego, debemos configurar cypress para que reconozca a cucumber
+- Agregar en cypress/plugins/index.js
+```
+const cucumber = require('cypress-cucumber-preprocessor').default
+
+module.exports = (on, config) => {
+  on('file:preprocessor', cucumber())
+}
+``` 
+- Agregar en cypress.json
+```
+"testFiles": "**/*.feature“ //Para visualizar únicamente los archivos .feature
+``` 
+- Agregar en package.json
+```
+"cypress-cucumber-preprocessor": {
+  "nonGlobalStepDefinitions": true
+}
+``` 
+Finalizada la configuración, se recomienda descargar el plugin Cucumber (Gherkin) Full Support en Visual Studio Code para que reconozca y ayude en la manuplación de archivos .feature
+
+### Restricción
+Para que la libreria reconozca la definición de los pasos, dicha definición de pasos debe estar en una carpeta con exactamente el mismo nombre del archivo .feature, por ejemplo
+Google.feature 
+./Google/definicion-pasos.js
+Tanto el archivo feature como la carpeta con el archivo de la definicion de pasos, deben estar en la carpeta de cypress/integration
+
+### Reutilizar pasos
+Para poder re-utilizar pasos entre los distintos features, debemos crear la definición del paso en un archivo .js. El autor nos recomienda que el nombre del archivo sea el mismo del paso y que se guarde en integration/common, por ejemplo:
+```
+// Google.feature
+Feature: Navegacion Google
+  Scenario: Validar logo Google
+	Given en la pagina "www.google.com"
+	Then visualizo el logo de Google
+```
+```
+// Facebook.feature
+Feature: Navegacion Facebook
+
+Scenario: Validar logo Facebook
+    Given en la pagina "www.facebook.com"
+	Then observo la pagina principal
+```
+El paso en comun es Given en la pagina "URL", por lo tanto, debemos crear en la carpeta integration/common el archivo con el nombre (sugerido) en_la_pagina_string.js y dentro colocar
+```
+import { Given } from "cypress-cucumber-preprocessor/steps";
+
+Given('en la pagina {string}', (url) => {
+    cy.visit(url)
+})
+```
+
+### Tags (etiqueta)
+Muchas veces, necesitamos ejecutar ciertos TC, tanto desde el Runner como desde línea de comandos, por lo cual, recurríamos a las Tags (Etiquetas)
+Tenemos distintas formas de configurarlo
+- Archivo cypress.json
+
+  Agregamos en el archivo cypress.json
+```
+"env":{
+	"TAGS": "@Simple"
+}
+```
+Eso logrará que cada vez que ejecutemos npm cypress run o npm cypress open, solo podamos ejecutar los scenarios que tengan la etiqueta @Simple
+- Desde comandos
+Podemos ejecutar el comando
+
+ 	> npx cypress-tags run -e 
+ TAGS='@Simple'
+
+	Ocurrira el mismo efecto que escribirlo en el archivo cypress.json, pero con al diferencia, que podremos realizarlo en forma dinamica.
+
+#### NOTA
+Al utilizar cypress-tags consegiremos que solamente se ejecuten y visualice el resultado final, aquellos features que en sus escenarios (scenario) posee cierta etiqueta, en cambio, al usar el comando cypress, ejecutará todos los escenarios (scenario) y features ignorando los que no poseea dicha etiqueta, por lo cual, el resultado final, se visualizaran todos los features.
+
+
+
+### Script
+Para evitar confuciones o errores en el momento de escribir el comando, podemos generar Scripts y directamente llamarlos.
+Para escribir dichos Scripts, debemos agregarlos en el package.json
+```
+  "scripts": {
+    "cypress": "cypress open",
+    "test:run:smoke": "cypress-tags run -e TAGS=\"@Smoke\"",
+    "test:open:simple": "cypress open -e TAGS=\"@Simple\""
+  },
+```
+Para poder ejecutarlo, debemos realizar
+ > npm run test:run:smoke 
+
+
 ## Link de las clases: 
 https://docs.google.com/document/d/1G8t5zQK-jb1MjjOT-l-TWrNGzpX96k0Sr9pPGXiWz5Y/edit?usp=sharing
