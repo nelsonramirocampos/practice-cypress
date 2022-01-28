@@ -21,6 +21,10 @@
   "homepage": "https://github.com/nelsonramirocampos/practice-cypress#readme",
   "devDependencies": {
     "cypress": "^9.3.1",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-xpath": "^1.6.2"
-  }
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }  
 }
