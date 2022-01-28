@@ -4,7 +4,9 @@
   "description": "Proyecto practica cypress",
   "main": "index.js",
   "scripts": {
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "test:run:smoke": "cypress-tags run -e TAGS=\"@Smoke\"",
+    "test:open:simple": "cypress open -e TAGS=\"@Simple\""
   },
   "repository": {
     "type": "git",
