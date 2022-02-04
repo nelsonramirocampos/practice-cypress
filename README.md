@@ -184,5 +184,59 @@ Para poder ejecutarlo, debemos realizar
  > npm run test:run:smoke 
 
 
+## Request Api's
+Para poder realizar llamados a servicios tipo API's, lo podemos realizar mediante el comando request(), en lo cual podremos ingresar los siguientes datos (es una manera de implementarlo):
+```
+cy.request({
+	method: "POST",
+	url: “http://URL.COM",
+	headers:
+	{
+		"Authorization": "Bearer " + <TOKEN>
+	},
+	body:
+	{ 
+		"pro1": "value1"
+	}
+})
+```
+Luego de realizar la llamada, deberemos llamar a then y por parametro, una variable que nos permitira manipuar la respuesta al llamado
+```
+then((res) => {
+	//Para que la salida posea un formato JSON
+	cy.log(JSON.stringify(res.body))
+	
+	//Pequeña validación de status code
+	expect(response.status).to.be.eq(200)
+
+	//Supongamos que el response body pose el campo name dentro de otro que se llama data
+	cy.log(res.body.data.name)
+})
+```
+La combinación de ambos, quedará de la siguiente manera:
+```
+cy.request({
+	method: "POST",
+	url: “http://URL.COM",
+	headers:
+	{
+		"Authorization": "Bearer " + <TOKEN>
+	},
+	body:
+	{ 
+		"pro1": "value1"
+	}
+}).then((res) => {
+	//Para que la salida posea un formato JSON
+	cy.log(JSON.stringify(res.body))
+	
+	//Pequeña validación de status code
+	expect(response.status).to.be.eq(200)
+
+	//Supongamos que el response body pose el campo name dentro de otro que se llama data
+	cy.log(res.body.data.name)
+})
+```
+
 ## Link de las clases: 
 https://docs.google.com/document/d/1G8t5zQK-jb1MjjOT-l-TWrNGzpX96k0Sr9pPGXiWz5Y/edit?usp=sharing
