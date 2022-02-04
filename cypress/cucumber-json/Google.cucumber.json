@@ -1,0 +1,32 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "Suite TC de Google",
+    "line": 1,
+    "id": "suite-tc-de-google",
+    "tags": [],
+    "uri": "Google.feature",
+    "elements": [
+      {
+        "id": "suite-tc-de-google;visitando-la-pagina-de-google",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "Visitando la pagina de google",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "en la pagina principal de \"https://www.google.com/\"",
+            "result": {
+              "status": "passed",
+              "duration": 4848000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

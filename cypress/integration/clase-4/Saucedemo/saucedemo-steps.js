@@ -21,5 +21,5 @@ When('presiono en el boton ingresar', () => {
 })
 
 Then('visualizo el logo de la pagina', () => {
-    cy.get('.app_logo').should('be.visible')
+    cy.get('.app_logo').should('not.be.visible')
 })
